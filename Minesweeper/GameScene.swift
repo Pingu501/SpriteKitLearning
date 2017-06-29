@@ -173,7 +173,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func processUserMotionForUpdate(forUpdate currentTime: CFTimeInterval) {
         if let data = self.motionManager.accelerometerData {
-            self.physicsWorld.gravity = CGVector(dx: data.acceleration.y * 20, dy: data.acceleration.x * -20)
+            switch UIDevice.current.userInterfaceIdiom {
+            case .pad:
+                self.physicsWorld.gravity = CGVector(dx: data.acceleration.y * -20, dy: data.acceleration.x * 20)
+                break
+            default:
+                self.physicsWorld.gravity = CGVector(dx: data.acceleration.y * 20, dy: data.acceleration.x * -20)
+            }
         }
     }
     
