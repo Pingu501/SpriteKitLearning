@@ -23,7 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-        backgroundColor = SKColor.darkGray
+        backgroundColor = SKColor.init(ciColor: CIColor(red:0.00, green:0.17, blue:0.21))
         
         self.motionManager.startAccelerometerUpdates()
         
@@ -139,7 +139,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addBall(touch : UITouch) {
         let circleSize = CGFloat(20)
-        let colors = [SKColor.white, SKColor.black]
+        let colors = getColors()
         let randomIndex = Int(arc4random_uniform(UInt32(colors.count)))
         let color = colors[randomIndex]
         
@@ -155,6 +155,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.affectedByGravity = true
         
         addChild(ball)
+    }
+    
+    func getColors() -> Array<SKColor> {
+        var colors = [SKColor]()
+        colors.append(SKColor.init(ciColor: CIColor(red:0.71, green:0.54, blue:0.00)))
+        colors.append(SKColor.init(ciColor: CIColor(red:0.80, green:0.29, blue:0.09)))
+        colors.append(SKColor.init(ciColor: CIColor(red:0.86, green:0.20, blue:0.18)))
+        colors.append(SKColor.init(ciColor: CIColor(red:0.83, green:0.21, blue:0.51)))
+        colors.append(SKColor.init(ciColor: CIColor(red:0.42, green:0.44, blue:0.77)))
+        colors.append(SKColor.init(ciColor: CIColor(red:0.15, green:0.55, blue:0.82)))
+        colors.append(SKColor.init(ciColor: CIColor(red:0.16, green:0.63, blue:0.60)))
+        colors.append(SKColor.init(ciColor: CIColor(red:0.52, green:0.60, blue:0.00)))
+        
+        return colors
     }
     
     func processUserMotionForUpdate(forUpdate currentTime: CFTimeInterval) {
